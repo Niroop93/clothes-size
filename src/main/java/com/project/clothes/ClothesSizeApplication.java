@@ -1,0 +1,12 @@
+package com.project.clothes;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ClothesSizeApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ClothesSizeApplication.class, args);
+	}
+}
