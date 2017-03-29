@@ -44,4 +44,10 @@ public class WebController {
 		return Jean;
 	}
 	
+	@RequestMapping("/findOneJeans")
+	public String findOneJeans(){
+		Jeans Jean =  jeansRepo.findByWaist(28L);
+		return Jean.toString();
+	}
+	
 }
