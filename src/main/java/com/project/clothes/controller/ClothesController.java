@@ -10,8 +10,12 @@ public class ClothesController {
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public String homePage()
 	{
-		return "home";
+		return "index";
 	}
 	
-
+	@RequestMapping(value="/ajax",method = RequestMethod.GET)
+	public String ajax()
+	{
+		return "home";
+	}
 }
