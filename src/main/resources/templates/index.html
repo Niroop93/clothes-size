@@ -77,42 +77,53 @@
     
 <script type= "text/javascript">
     function onSubmit(){
-        var data={};
-        JSON.stringify($('#basicBootstrapForm').serializeArray().map(function(x){data[x.name] = x.value;}));
+        var val={};
+        JSON.stringify($('#basicBootstrapForm').serializeArray().map(function(x){val[x.name] = x.value;}));
+        console.log( val );
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/findJeans",
+            data : val,
+            dataType : 'json',
+            success : function(data) {
+	        		 console.log("response: "+JSON.stringify(data));
+	         }
+        });
+          //return false; //don't submit
 
-          console.log( data );
-          return false; //don't submit
-        
-        
-   /*  $.ajax({
+       /*jQuery.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/api/search",
-        data: JSON.stringify(search),
+        url: "/findJeans",
+        data: data,
         dataType: 'json',
         cache: false,
         timeout: 600000,
-        success: function (data) {
-
+        success: console.log("success");
+        	function (data) {
+        	console.log("SUCCESS : ", data);
+        	
             var json = "<h4>Ajax Response</h4><pre>"
                 + JSON.stringify(data, null, 4) + "</pre>";
             $('#feedback').html(json);
 
-            console.log("SUCCESS : ", data);
+            
             $("#btn-search").prop("disabled", false);
 
         },
         error: function (e) {
-
+        	console.log("ERROR : ", e);
+        	
             var json = "<h4>Ajax Response</h4><pre>"
                 + e.responseText + "</pre>";
             $('#feedback').html(json);
 
-            console.log("ERROR : ", e);
+            
             $("#btn-search").prop("disabled", false);
 
         }
-    }); */
+    });*/
 
 }
     var res={"brand":"GAP","size":"0"};
