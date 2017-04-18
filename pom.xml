@@ -69,6 +69,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		     <groupId>net.sourceforge.nekohtml</groupId>
+		     <artifactId>nekohtml</artifactId>
+		     <version>1.9.21</version>
+		 </dependency>
+		 <dependency>
+	        <groupId>org.json</groupId>
+	        <artifactId>json</artifactId>
+	        <version>20090211</version>
+	    </dependency>
 	</dependencies>
 
 	<build>

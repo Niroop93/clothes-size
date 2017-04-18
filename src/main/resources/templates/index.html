@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+  <title>Webname</title>
+    
+    
+    
+    
+    
+    
+   <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/scripts/vendor/bootstrap/css/bootstrap.min.css}" href="/scripts/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+
+    <!-- Theme CSS -->
+    <link th:href="@{/scripts/css/clean-blog.min.css}" href="/scripts/css/clean-blog.min.css" rel="stylesheet"></link>
+    <link th:href="@{/scripts/css/clean-blog.css}" href="/scripts/css/clean-blog.css" rel="stylesheet"></link>
+
+    
+    
+     <!-- Custom Fonts -->
+    <link th:href="@{/scripts/vendor/font-awesome/css/font-awesome.min.css}" href="/scripts/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'></link>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'></link>
+    
+    <!--
+    <script src="js/111.js"></script>
+<link href="css/111.css" rel="stylesheet" media="screen"> </link>
+    
+    <link href="css/111.css" rel="stylesheet" media="screen"> </link>
+    <script type="text/javascript" src="validation.min.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css" media="screen"> </link>   -->
+<script type="text/javascript" th:src="@{/scripts/script.js}"></script>  
+    
+    
+    
+    
+    
+    
+   
+
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'></link>
+<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/reset.css"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"></link>
+
+  
+      <link rel="stylesheet" th:href="@{/scripts/css/style.css}"></link>
+    
+    
+    
+    
+    
+    
+  
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+ <link rel="stylesheet" th:href="@{/scripts/dist/css/bootstrap-select.css}"></link> 
+    
+    
+
+ 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script th:src="@{/scripts/dist/js/bootstrap-select.js}"></script>
+</head>
+    
+    
+    
+<script type= "text/javascript">
+    function onSubmit(){
+        var val={};
+        JSON.stringify($('#basicBootstrapForm').serializeArray().map(function(x){val[x.name] = x.value;}));
+        console.log( val );
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/findJeans",
+            data : val,
+            dataType : 'json',
+            success : function(data) {
+	        		 console.log("response: "+JSON.stringify(data));
+	         }
+        });
+          //return false; //don't submit
+
+       /*jQuery.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/findJeans",
+        data: data,
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: console.log("success");
+        	function (data) {
+        	console.log("SUCCESS : ", data);
+        	
+            var json = "<h4>Ajax Response</h4><pre>"
+                + JSON.stringify(data, null, 4) + "</pre>";
+            $('#feedback').html(json);
+
+            
+            $("#btn-search").prop("disabled", false);
+
+        },
+        error: function (e) {
+        	console.log("ERROR : ", e);
+        	
+            var json = "<h4>Ajax Response</h4><pre>"
+                + e.responseText + "</pre>";
+            $('#feedback').html(json);
+
+            
+            $("#btn-search").prop("disabled", false);
+
+        }
+    });*/
+
+}
+    var res={"brand":"GAP","size":"0"};
+    function output(res) {
+        var trHTML = '';
+        $.each(response, function (i, item) {
+            trHTML += '<tr><td>' + item.rank + '</td><td>' + item.content + '</td><td>' + item.UID + '</td></tr>';
+        });
+        $('#records_table').append(trHTML);
+        console.log(trHTML);
+    }
+    
+    </script>
+    
+    <!--                                            BODY!!!!!!!!!!!!!!!!!!!!!!!   -->
+    
+    
+   <body>
+  <body>
+	<header role="banner">
+		
+        
+      
+
+		<nav class="main-nav">
+			<ul>
+				<!-- inser more links here -->
+                
+                 <li class="active">
+                        <a href="index.html">Home</a>
+                    </li>
+                  <!--  <li>
+                        <a href="about.html">About</a>
+                    </li> -->
+                  
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+				<li><a class="cd-signin" href="#">Sign in</a></li>
+				<li><a class="cd-signup" href="#">Sign up</a></li>
+			</ul>
+		</nav>
+        
+        
+        
+        
+        
+        
+	</header>
+      
+
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      
+      
+      
+      
+      
+   
+
+	<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+		<div class="cd-user-modal-container"> 
+			<ul class="cd-switcher">
+				<li><a href="#0">Sign in</a></li>
+				<li><a href="#0">New account</a></li>
+			</ul>
+
+			<div id="cd-login"> <!-- log in form -->
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signin-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail"></input>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">Password</label>
+						<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password"></input>
+						<a href="#0" class="hide-password">Hide</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input type="checkbox" id="remember-me" checked="checked"></input>
+						<label for="remember-me">Remember me</label>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width" type="submit" value="Login"></input>
+					</p>
+				</form>
+				
+				<p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+				
+			</div> 
+
+			<div id="cd-signup"> 
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signup-username">Username</label>
+						<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username"></input>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signup-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail"></input>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">Password</label>
+						<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password"></input>
+						<a href="#0" class="hide-password">Hide</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input type="checkbox" id="accept-terms"></input>
+						<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Create account"></input>
+					</p>
+				</form>
+
+			
+			</div> 
+
+			<div id="cd-reset-password"> <!-- reset password form -->
+				<p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="reset-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail"></input>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Reset password"></input>
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+			</div> <!-- cd-reset-password -->
+			<a href="#0" class="cd-close-form">Close</a>
+		</div> 
+	</div>
+</body>
+  <script th:src='@{/scripts/js/jquery.min.js}'></script>
+
+    <script th:src="@{/scripts/js/index.js}"></script>
+        
+     
+        
+       
+    
+                            <!-- Main Content /////////////////////////////////////////////////////////////////////////////-->
+  
+    
+    
+    
+    
+    <!-- MAEIN PANEL-->
+    
+    
+  <div class="container">
+    <div class="panel panel-default">
+      
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    
+                   
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                      <!--  MaleFemale ratio -->
+                    
+                    
+                    <BR></br>
+          <!--action='action.php'-->           
+                        
+                        
+                        
+                        
+                        
+<form name="MAIN" id="basicBootstrapForm"  method="get" class="form-horizontal" >
+    
+             <div class="form-group" >
+        <label class="control-label col-sm-2" for="gender">Gender:</label>
+            
+
+
+ 
+
+             
+                <label class="custom-control custom-radio">
+                    &#160;&#160;&#160;&#160;&#160;&#160;
+                    <input name="gender" type="radio" class="custom-control-input" required value="M" ></input>
+                    <span class="radio-inline"></span>
+                    <span class="custom-control-description">Male</span>
+             </label>     
+               <label class="custom-control custom-radio"> &#160;&#160;&#160;&#160;
+                    <input name="gender" type="radio" class="custom-control-input" required value="F" checked="checked"></input>
+                    <span class="radio-inline"></span>
+                    <span class="custom-control-description" >Female</span>
+                    
+                    </label>
+
+ 
+             <!--
+             
+
+           <div class="btn-group" data-toggle="buttons">
+			<label class="btn btn-default">
+				<input name="year" value="2011" type="radio">2011
+			</label>
+			
+			<label class="btn btn-default">
+				<input name="year" value="2013" class="active" type="radio">2013
+			</label>  
+             
+             </div>
+             -->
+    
+        </div>
+
+          
+  
+              <div class="form-group" >
+     <label class="control-label col-sm-2" for="brand">Brand:</label>
+    <div class="col-sm-2">
+      <select name="brand" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  required>
+        <option value="01">GAP</option>
+        <option value="02">American Eagle</option>
+    
+      </select>
+    </div>
+    </div>
+    
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="size">Size:</label>
+    <div class="col-sm-2">
+          <select name="size" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose size(s)"  required>
+              <option value="0">0</option>
+              <option value="2">2</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+              <option value="10">10</option>
+              <option value="12">12</option>
+              <option value="14">14</option>
+              <option value="16">16</option>
+            
+      </select>
+    </div>
+    </div>
+ 
+             
+               <div class="form-group">
+    <label class="control-label col-sm-2" for="style">Style:</label> 
+      <div class="col-sm-2">             
+      <select name="style" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose style(s)" required> 
+        <option>aa</option>
+        <option>bb</option>
+        <option>cc</option>
+        <option>dd</option>
+        <option>ee</option>
+      </select>
+    </div>
+    </div>
+ 
+       
+    
+    <div class="form-group" >
+     <label class="control-label col-sm-2" for="brand">Brand2:</label>
+    <div class="col-sm-2">
+      <select name="brand2" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  required>
+        <option value="01">GAP</option>
+        <option value="02">American Eagle</option>
+      </select>
+    </div>
+    </div>
+    
+    
+ 
+    
+    <button type="button" class="btn btn-primary center-block btn-lg" required  value="Find out my size" onclick='javascript:onSubmit();'>FIND MY SIZE</button> 
+    
+                        </form>                                   
+            
+                    
+ <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    
+                  
+     </div>
+            </div>
+            
+            
+            
+            
+                </div>
+            </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    
+                   
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                      <!--  MaleFemale ratio -->
+                    
+                    
+                    <BR></br>
+          <!--action='action.php'-->           
+                        
+                        
+                        
+                        
+                        
+<form name="MAIN" id="basicBootstrapForm"  method="get" class="form-horizontal" >
+    
+            
+          
+  
+              
+    
+ 
+     
+ 
+    
+    <button type="button" class="btn btn-primary center-block btn-lg" required  value="Find out my size" onclick='javascript:onSubmit();'>Output</button> 
+    
+                        </form>                                   
+            
+                    
+                 
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+
+ <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    
+                  
+     </div>
+            </div>
+            
+            
+            
+            
+                </div>
+            </div>
+                    
+                    
+        </div>
+      
+    
+    
+        
+      
+
+     <!-- BEGIN # BOOTSNIP INFO 
+<div class="container">
+	<div class="row">
+		
+        <p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">Open Login Modal</a></p>
+	</div>
+</div>
+<!-- END # BOOTSNIP INFO -->
+
+<!-- BEGIN # MODAL LOGIN -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">
+					<img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+				</div>
+                
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+                
+                    <!-- Begin # Login Form -->
+                    <form id="login-form">
+		                <div class="modal-body">
+				    		<div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">Type your username and password.</span>
+                            </div>
+				    		<input id="login_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
+				    		<input id="login_password" class="form-control" type="password" placeholder="Password" required>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Remember me
+                                </label>
+                            </div>
+        		    	</div>
+				        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                            </div>
+				    	    <div>
+                                <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
+                                <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
+                            </div>
+				        </div>
+                    </form>
+                    <!-- End # Login Form -->
+                    
+                    <!-- Begin | Lost Password Form -->
+                    <form id="lost-form" style="display:none;">
+    	    		    <div class="modal-body">
+		    				<div id="div-lost-msg">
+                                <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-lost-msg">Type your e-mail.</span>
+                            </div>
+		    				<input id="lost_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
+            			</div>
+		    		    <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                            </div>
+                            <div>
+                                <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="lost_register_btn" type="button" class="btn btn-link">Register</button>
+                            </div>
+		    		    </div>
+                    </form>
+                    <!-- End | Lost Password Form -->
+                    
+                    <!-- Begin | Register Form -->
+                    <form id="register-form" style="display:none;">
+            		    <div class="modal-body">
+		    				<div id="div-register-msg">
+                                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-register-msg">Register an account.</span>
+                            </div>
+		    				<input id="register_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
+                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
+                            <input id="register_password" class="form-control" type="password" placeholder="Password" required>
+            			</div>
+		    		    <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                            </div>
+                            <div>
+                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="register_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
+                            </div>
+		    		    </div>
+                    </form>
+                    <!-- End | Register Form -->
+                    
+                </div>
+                <!-- End # DIV Form -->
+                
+			</div>
+		</div>
+	</div>
+    <!-- END # MODAL LOGIN -->
+      
+      
+      
+            </div>
+      
+    
+  <footer>
+         <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center ">
+                        <li>
+                            
+                            
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-2x fa-inverse"></i>
+                                </span>
+                            </a>
+                            
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                   <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i> 
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; 2017</p>
+                </div>
+            </div>
+</div>
+    </footer>
+ 
+   
+
+    
+             
+
+
+    
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    </body>                         
+</html>
