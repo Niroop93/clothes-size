@@ -29,7 +29,8 @@
     <link th:href="@{/scripts/vendor/font-awesome/css/font-awesome.min.css}" href="/scripts/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'></link>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'></link>
-    
+    <script src="js/jput.min.js"></script>
+    <script type="text/javascript" th:src="@{/scripts/jput.min.js}"></script>
     <!--
     <script src="js/111.js"></script>
 <link href="css/111.css" rel="stylesheet" media="screen"> </link>
@@ -88,6 +89,11 @@
             dataType : 'json',
             success : function(data) {
 	        		 console.log("response: "+JSON.stringify(data));
+	        		 $("#tbody").jPut({
+	        			    jsonData:JSON.stringify(data),
+	        			    //ajax_url:"youfile.json",  if you want to call from a json file
+	        			    name:"tbody_template",
+	        			});
 	         }
         });
           //return false; //don't submit
@@ -135,6 +141,28 @@
         $('#records_table').append(trHTML);
         console.log(trHTML);
     }
+    
+    function removeselect(brand)
+    {var val = brand;
+    if(val==1)
+    	{
+    	$('#brand2').empty();
+    	$('#brand2').append('<option val="2">American Eagle</option>')
+    	$('#brand2').append('<option val="3">GUESS</option>')
+    	}
+    else if(val==2)
+	{
+    	$('#brand2').empty();
+    	$('#brand2').append('<option val="1">GAP</option>')
+    	$('#brand2').append('<option val="3">GUESS</option>')
+	} else if(val==3)
+    	{
+		$('#brand2').empty();
+		$('#brand2').append('<option val="1">GAP</option>')
+    	$('#brand2').append('<option val="2">American Eagle</option>')
+    	}
+    }
+    
     
     </script>
     
@@ -374,10 +402,10 @@
               <div class="form-group" >
      <label class="control-label col-sm-2" for="brand">Brand:</label>
     <div class="col-sm-2">
-      <select name="brand" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  required>
-        <option value="01">GAP</option>
-        <option value="02">American Eagle</option>
-    
+      <select name="brand" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  onchange="removeselect(this.value);" required>
+        <option value="1">GAP</option>
+        <option value="2">American Eagle</option>
+    	<option value="3">GUESS</option>
       </select>
     </div>
     </div>
@@ -420,9 +448,10 @@
     <div class="form-group" >
      <label class="control-label col-sm-2" for="brand">Brand2:</label>
     <div class="col-sm-2">
-      <select name="brand2" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  required>
-        <option value="01">GAP</option>
-        <option value="02">American Eagle</option>
+      <select name="brand2" id=brand2 class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  required>
+        <option value="1">GAP</option>
+        <option value="2">American Eagle</option>
+        <option value="3">GUESS</option>
       </select>
     </div>
     </div>
@@ -477,23 +506,27 @@
                     
                     <BR></br>
           <!--action='action.php'-->           
-                        
-                        
-                        
-                        
+                                     
                         
 <form name="MAIN" id="basicBootstrapForm"  method="get" class="form-horizontal" >
-    
-            
-          
-  
+   
               
     
  
-     
+     <div jput="tbody_template">
+ <tr>
+  <td>{{brand}}</td>
+  <td>{{size}}</td>
+ </tr>
+</div>
+
+<table>
+ <tbody id="tbody">
+ </tbody>
+</table>
  
     
-    <button type="button" class="btn btn-primary center-block btn-lg" required  value="Find out my size" onclick='javascript:onSubmit();'>Output</button> 
+    
     
                         </form>                                   
             
