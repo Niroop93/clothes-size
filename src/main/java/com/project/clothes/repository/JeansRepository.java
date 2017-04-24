@@ -25,6 +25,9 @@ public interface JeansRepository extends CrudRepository<Jeans, Long>{
 	@Query(value = "Select j.waist from jeans j where j.brand_id = ?1 and j.size = ?2", nativeQuery = true)
 	float findWaistbySize(Long brandId, Long size);
 	
+	@Query(value = "Select j.hip from jeans j where j.brand_id = ?1 and j.size = ?2", nativeQuery = true)
+	float findHipbySize(Long brandId, Long size);
+	
 	@Query(value = "Select b.brand_name,j.size from jeans j left join brands b on j.brand_id=b.brand_id where j.brand_id=?1 and j.waist between ?2 and ?3", nativeQuery = true)
 	List<Object[]> findJeansbyBrand(Long brandId,float waistMin,float waistMax);
 	
