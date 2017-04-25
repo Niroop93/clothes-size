@@ -69,7 +69,7 @@
 
  
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script th:src="@{/scripts/dist/js/bootstrap-select.js}"></script>
 </head>
@@ -89,48 +89,18 @@
             dataType : 'json',
             success : function(data) {
 	        		 console.log("response: "+JSON.stringify(data));
-	        		 $("#tbody").jPut({
-	        			    jsonData:JSON.stringify(data),
-	        			    //ajax_url:"youfile.json",  if you want to call from a json file
-	        			    name:"tbody_template",
-	        			});
+        				    var tbl_body = "<tr><th><label class=\"control-label col-sm-2\">BRAND</label></th><br><br><th><label class=\"control-label col-sm-2\">SIZE</label></th></tr>";
+        				    var odd_even = false;
+        				        var tbl_row = "";
+        				        $.each(data, function(k , v) {
+        				            tbl_row += "<td class=\"control-label col-sm-2\">"+ v +"</td>";
+        				        })
+        				        tbl_body += "<tr class=\""+( odd_even ? "odd" : "even")+"\">"+tbl_row+"</tr>";
+        				        odd_even = !odd_even;
+        				    $("#tbody").html(tbl_body);
 	         }
         });
-          //return false; //don't submit
-
-       /*jQuery.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: "/findJeans",
-        data: data,
-        dataType: 'json',
-        cache: false,
-        timeout: 600000,
-        success: console.log("success");
-        	function (data) {
-        	console.log("SUCCESS : ", data);
-        	
-            var json = "<h4>Ajax Response</h4><pre>"
-                + JSON.stringify(data, null, 4) + "</pre>";
-            $('#feedback').html(json);
-
-            
-            $("#btn-search").prop("disabled", false);
-
-        },
-        error: function (e) {
-        	console.log("ERROR : ", e);
-        	
-            var json = "<h4>Ajax Response</h4><pre>"
-                + e.responseText + "</pre>";
-            $('#feedback').html(json);
-
-            
-            $("#btn-search").prop("disabled", false);
-
-        }
-    });*/
-
+          
 }
     var res={"brand":"GAP","size":"0"};
     function output(res) {
@@ -143,58 +113,60 @@
     }
     
     function removeselect(brand)
-    {var val = brand;
-    if(val==1)
+    {
+    	var val = brand;
+    	if(val==1)
     	{
-    	$('#brand2').empty();
-    	$('#brand2').append('<option val="2">American Eagle</option>')
-    	$('#brand2').append('<option val="3">GUESS</option>')
-    	$('#size').empty();
-    	$('#size').append('<option val="2">0</option>')
-    	$('#size').append('<option val="3">2</option>')
-    	$('#size').append('<option val="4">4</option>')
-    	$('#size').append('<option val="5">6</option>')
-    	$('#size').append('<option val="6">8</option>')
-    	$('#size').append('<option val="7">10</option>')
-    	$('#size').append('<option val="8">12</option>')
-    	$('#size').append('<option val="9">14</option>')
-    	$('#size').append('<option val="10">16</option>')
+    	$('#brand2').append('<option val="2">American Eagle</option>');
+    	$('#brand2').append('<option val="3">GUESS</option>');
+    	$('#brand2').change();
+    	$('#size').append('<option val="0">0</option>');
+    	$('#size').append('<option val="2">2</option>');
+    	$('#size').append('<option val="4">4</option>');
+    	$('#size').append('<option val="6">6</option>');
+    	$('#size').append('<option val="8">8</option>');
+    	$('#size').append('<option val="10">10</option>');
+    	$('#size').append('<option val="12">12</option>');
+    	$('#size').append('<option val="14">14</option>');
+    	$('#size').append('<option val="16">16</option>');
+    	$('#size').change();
     	}
     else if(val==2)
 	{
-    	$('#brand2').empty();
-    	$('#brand2').append('<option val="1">GAP</option>')
-    	$('#brand2').append('<option val="3">GUESS</option>')
-    	$('#size').empty();
-    	$('#size').append('<option val="2">0</option>')
-    	$('#size').append('<option val="3">2</option>')
-    	$('#size').append('<option val="4">4</option>')
-    	$('#size').append('<option val="5">6</option>')
-    	$('#size').append('<option val="6">8</option>')
-    	$('#size').append('<option val="7">10</option>')
-    	$('#size').append('<option val="8">12</option>')
-    	$('#size').append('<option val="9">14</option>')
-    	$('#size').append('<option val="10">16</option>')
-    	$('#size').append('<option val="12">18</option>')
-    	$('#size').append('<option val="14">20</option>')
+    	$('#brand2').remove();
+    	$('#brand2').append('<option val="1">GAP</option>');
+    	$('#brand2').append('<option val="3">GUESS</option>');
+    	$('#size').remove();
+    	$('#size').append('<option val="0">0</option>');
+    	$('#size').append('<option val="2">2</option>');
+    	$('#size').append('<option val="4">4</option>');
+    	$('#size').append('<option val="6">6</option>');
+    	$('#size').append('<option val="8">8</option>');
+    	$('#size').append('<option val="10">10</option>');
+    	$('#size').append('<option val="12">12</option>');
+    	$('#size').append('<option val="14">14</option>');
+    	$('#size').append('<option val="16">16</option>');
+    	$('#size').append('<option val="18">18</option>');
+    	$('#size').append('<option val="20">20</option>');
 	} else if(val==3)
     	{
 		$('#brand2').empty();
-		$('#brand2').append('<option val="1">GAP</option>')
-    	$('#brand2').append('<option val="2">American Eagle</option>')
+		$('#brand2').append('<option val="1">GAP</option>');
+    	$('#brand2').append('<option val="2">American Eagle</option>');
     	$('#size').empty();
-    	$('#size').append('<option val="2">32</option>')
-    	$('#size').append('<option val="3">31</option>')
-    	$('#size').append('<option val="4">30</option>')
-    	$('#size').append('<option val="5">29</option>')
-    	$('#size').append('<option val="6">28</option>')
-    	$('#size').append('<option val="7">27</option>')
-    	$('#size').append('<option val="8">26</option>')
-    	$('#size').append('<option val="9">25</option>')
-    	$('#size').append('<option val="10">24</option>')
-    	$('#size').append('<option val="12">23</option>')
+    	$('#size').append('<option val="32">32</option>');
+    	$('#size').append('<option val="31">31</option>');
+    	$('#size').append('<option val="30">30</option>');
+    	$('#size').append('<option val="29">29</option>');
+    	$('#size').append('<option val="28">28</option>');
+    	$('#size').append('<option val="27">27</option>');
+    	$('#size').append('<option val="26">26</option>');
+    	$('#size').append('<option val="25">25</option>');
+    	$('#size').append('<option val="24">24</option>');
+    	$('#size').append('<option val="23">23</option>');
     	}
     }
+    
     
     
     </script>
@@ -344,7 +316,7 @@
 		</div> 
 	</div>
 </body>
-  <script th:src='@{/scripts/js/jquery.min.js}'></script>
+  <!-- <script th:src='@{/scripts/js/jquery.min.js}'></script> -->
 
     <script th:src="@{/scripts/js/index.js}"></script>
         
@@ -430,12 +402,12 @@
     
         </div>
 
-          
+          <!--  onchange="removeselect(this.value);"  -->
   
               <div class="form-group" >
      <label class="control-label col-sm-2" for="brand">Brand:</label>
     <div class="col-sm-2">
-      <select name="brand" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  onchange="removeselect(this.value);" required>
+      <select name="brand" id="brand" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)" required>
         <option value="1">GAP</option>
         <option value="2">American Eagle</option>
     	<option value="3">GUESS</option>
@@ -481,7 +453,7 @@
     <div class="form-group" >
      <label class="control-label col-sm-2" for="brand">Brand2:</label>
     <div class="col-sm-2">
-      <select name="brand2" id=brand2 class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)"  required>
+      <select name="brand2" id="brand2" class="selectpicker" data-live-search="false" data-live-search-style="begins"  title="Choose brand(s)" required>
         <option value="1">GAP</option>
         <option value="2">American Eagle</option>
         <option value="3">GUESS</option>
@@ -541,27 +513,19 @@
           <!--action='action.php'-->           
                                      
                         
-<form name="MAIN" id="basicBootstrapForm"  method="get" class="form-horizontal" >
    
               
     
- 
-     <div jput="tbody_template">
- <tr>
-  <td>{{brand}}</td>
-  <td>{{size}}</td>
- </tr>
-</div>
 
-<table>
- <tbody id="tbody">
- </tbody>
-</table>
+		 <table border = 1>
+			 <tbody id="tbody">
+			 </tbody>
+		</table>
+
+
  
     
-    
-    
-                        </form>                       
+                          
             
                     
                  
@@ -749,6 +713,6 @@
 
 
     
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
     </body>                         
 </html>
